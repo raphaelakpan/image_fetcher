@@ -1,3 +1,3 @@
-require_relative './lib/main.rb'
+require_relative "./lib/main.rb"
 
 Main.new.run

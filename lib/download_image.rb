@@ -1,10 +1,10 @@
-require 'down'
-require_relative './logger.rb'
+require "down"
+require_relative "./logger.rb"
 
 class DownloadImage
   attr_reader :error
 
-  DESTINATION = './downloads'
+  DESTINATION = "./downloads"
   MAX_SIZE = 5 * 1024 * 1024 # 5 MB
 
   def initialize(url)

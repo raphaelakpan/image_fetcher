@@ -1,6 +1,6 @@
 
-require_relative './process_file.rb'
-require_relative './logger.rb'
+require_relative "./process_file.rb"
+require_relative "./logger.rb"
 
 class Main
   def run
@@ -18,10 +18,10 @@ class Main
 
   def valid_input?
     if @file_path.nil?
-      Logger.warn('Please provide a relative path (from this project folder) to your file')
+      Logger.warn("Please provide a relative path (from this project folder) to your file")
       return false
     elsif (@file_path =~ /.txt/).nil?
-      Logger.warn('Please provide a text file (.txt extension)')
+      Logger.warn("Please provide a text file (.txt extension)")
       return false
     end
     true

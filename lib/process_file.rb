@@ -1,5 +1,5 @@
-require_relative './download_image.rb'
-require_relative './logger.rb'
+require_relative "./download_image.rb"
+require_relative "./logger.rb"
 
 class ProcessFile
   attr_reader :errors, :downloaded
@@ -17,7 +17,7 @@ class ProcessFile
     end
     log_results
   rescue Errno::ENOENT => e
-    Logger.error 'Unable to read file. Please provide a relative path to an existing text file'
+    Logger.error "Unable to read file. Please provide a relative path to an existing text file"
   end
 
   private
