@@ -23,7 +23,7 @@ RSpec.describe Main do
       end
     end
 
-    context "when file_path argument does not end in ".txt"" do
+    context "when file_path argument does not end in " do
       it "logs a text file extension error message" do
         expect(ARGV).to receive(:first) { "../file.csv" }
         expect(Logger).to receive(:warn).with("Please provide a text file (.txt extension)")
@@ -33,7 +33,7 @@ RSpec.describe Main do
       end
     end
 
-    context "when file_path argument ends in ".txt"" do
+    context "when file_path argument ends in " do
       let(:file_path) { "../file.txt" }
       let(:process_file) { instance_double("ProcessFile", perform: nil) }
 
