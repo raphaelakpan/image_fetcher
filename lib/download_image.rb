@@ -5,7 +5,7 @@ class DownloadImage
   attr_reader :error
 
   DESTINATION = "./downloads"
-  MAX_SIZE = 5 * 1024 * 1024 # 5 MB
+  MAX_SIZE_IN_MB = 5
 
   def initialize(url)
     @url = url
@@ -32,7 +32,7 @@ class DownloadImage
   end
 
   def download
-    @temp_file = Down.download(@url, max_size: MAX_SIZE)
+    @temp_file = Down.download(@url, max_size: MAX_SIZE_IN_MB * 1024 * 1024)
   rescue => e
     handle_error(e)
   end
@@ -48,7 +48,7 @@ class DownloadImage
              when Down::InvalidUrl then
                "Invalid Image URL"
              when Down::TooLarge then
-               "File is bigger than #{MAX_SIZE} MB"
+               "File is bigger than #{MAX_SIZE_IN_MB} MB"
              else
                "Unable to download Image"
              end

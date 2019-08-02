@@ -8,6 +8,7 @@ RSpec.describe DownloadImage do
 
   describe "#perform" do
     let(:download_image) { DownloadImage.new(url) }
+    let(:max_size) { DownloadImage::MAX_SIZE_IN_MB * 1024 * 1024 }
 
     before do
       # mocking it so it doesn't actually run
@@ -30,21 +31,23 @@ RSpec.describe DownloadImage do
     context "when image size is bigger than 5MB" do
       it "stores an invalid file size error message" do
         expect(Down).to receive(:download).with(
-          url, max_size: DownloadImage::MAX_SIZE
+          url, max_size: max_size
         ) { raise Down::TooLarge }
 
         expect(Logger).to receive(:error)
 
         download_image.perform
 
-        expect(download_image.error).to eq "File is bigger than #{DownloadImage::MAX_SIZE} MB"
+        expect(download_image.error).to eq(
+          "File is bigger than #{DownloadImage::MAX_SIZE_IN_MB} MB"
+        )
       end
     end
 
     context "when an exception is raised while downloading the image" do
       it "stores an error message" do
         expect(Down).to receive(:download).with(
-          url, max_size: DownloadImage::MAX_SIZE
+          url, max_size: max_size
         ) { raise Down::ConnectionError }
 
         expect(Logger).to receive(:error)
@@ -66,7 +69,7 @@ RSpec.describe DownloadImage do
       context "and destination folder does not exist" do
         it "creates a new folder and saves the image" do
           expect(Down).to receive(:download).with(
-            url, max_size: DownloadImage::MAX_SIZE
+            url, max_size: max_size
           ) { temp_file }
 
           expect(Dir).to receive(:exist?).with(DownloadImage::DESTINATION) { false }
@@ -84,7 +87,7 @@ RSpec.describe DownloadImage do
       context "and destination folder exist" do
         it "does not create a new folder saves the image" do
           expect(Down).to receive(:download).with(
-            url, max_size: DownloadImage::MAX_SIZE
+            url, max_size: max_size
           ) { temp_file }
 
           expect(Dir).to receive(:exist?).with(DownloadImage::DESTINATION) { true }
