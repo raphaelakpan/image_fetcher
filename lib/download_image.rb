@@ -14,6 +14,7 @@ class DownloadImage
 
   def perform
     log_start
+    return unless valid_image_url?
     download
     return unless @error.nil?
     save_file
@@ -51,6 +52,15 @@ class DownloadImage
              else
                "Unable to download Image"
              end
+    Logger.error "#{@error}\n\n"
+  end
+
+  def valid_image_url?
+    image_url_pattern = /(http(s?):)([\/|.|\w|\s|-])*\.(?:jpg|gif|png)/
+    is_valid = Regexp.new(image_url_pattern).match?(@url)
+    return true if is_valid
+
+    @error = "Invalid image URL"
     Logger.error "#{@error}\n\n"
   end
 end
