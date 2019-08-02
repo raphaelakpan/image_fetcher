@@ -21,7 +21,7 @@ class Main
       Logger.warn('Please provide a relative path to your file')
       return false
     elsif (@file_path =~ /.txt/).nil?
-      Logger.warn('Please provide a text file')
+      Logger.warn('Please provide a text file (.txt extension)')
       return false
     end
     true
@@ -40,7 +40,7 @@ class Main
         :: ::                                                :: ::
         Welcome to the Image Fetcher App 🤠
         This script will download images from URLs in your
-        privided text file and store on your local disk directory
+        provided text file and store on your local disk directory
         :: ::                                                :: ::
         ::                                                      ::
 
