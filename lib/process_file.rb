@@ -2,6 +2,8 @@ require_relative './download_image.rb'
 require_relative './logger.rb'
 
 class ProcessFile
+  attr_reader :errors, :downloaded
+
   def initialize(file_path)
     @file_path = file_path
     @errors = 0
@@ -9,13 +11,16 @@ class ProcessFile
   end
 
   def perform
+    log_file
     File.foreach(@file_path) do |url|
       download_file(url)
     end
-    display_results
+    log_results
   rescue Errno::ENOENT => e
     Logger.error 'Unable to read file. Please provide a relative path to an existing text file'
   end
+
+  private
 
   def download_file(url)
     download = DownloadImage.new(url)
@@ -27,7 +32,11 @@ class ProcessFile
     end
   end
 
-  def display_results
+  def log_file
+    Logger.log("PROCESSING: --> #{@file_path}\n\n")
+  end
+
+  def log_results
     Logger.log(
       <<-MSG
 
@@ -35,7 +44,7 @@ class ProcessFile
       ✅ DOWNLOADED: #{@downloaded} images
       🚨 ERRORS: #{@errors}
 
-      FOLDER -> #{DownloadImage::DESTINATION}
+      FOLDER --> #{DownloadImage::DESTINATION}
 
       MSG
     )
