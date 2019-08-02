@@ -60,7 +60,7 @@ class DownloadImage
     is_valid = Regexp.new(image_url_pattern).match?(@url)
     return true if is_valid
 
-    @error = "Invalid image URL"
+    @error = "Invalid image URL. Image must be JPG, GIF or PNG"
     Logger.error "#{@error}\n\n"
   end
 end
