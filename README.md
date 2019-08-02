@@ -21,12 +21,13 @@ See an example file [here](./sample_data.txt)
 
 ## Getting Started
 * Clone the repo: `git clone https://github.com/raphaelakpan/image_fetcher.git`
-* Change directory: `cd image_fecther`
+* Change directory: `cd image_fetcher`
 * Install dependencies: `bundle install`
 * Run `ruby app.rb ./sample_data.txt`
 
 ## Sample output
-![image](https://user-images.githubusercontent.com/23452546/62360494-cc1bf800-b510-11e9-9926-91efd07afbc7.png)
+![image](https://user-images.githubusercontent.com/23452546/62362294-8d883c80-b514-11e9-977c-93b27cbba31a.png)
+
 
 ## Tests
 * Run `rspec`
