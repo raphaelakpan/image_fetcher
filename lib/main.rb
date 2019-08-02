@@ -18,7 +18,7 @@ class Main
 
   def valid_input?
     if @file_path.nil?
-      Logger.warn('Please provide a relative path to your file')
+      Logger.warn('Please provide a relative path (from this project folder) to your file')
       return false
     elsif (@file_path =~ /.txt/).nil?
       Logger.warn('Please provide a text file (.txt extension)')
@@ -29,8 +29,7 @@ class Main
 
 
   def process_file
-    absolute_path = File.expand_path(@file_path, __dir__)
-    ProcessFile.new(absolute_path).perform
+    ProcessFile.new(@file_path).perform
   end
 
   def welcome

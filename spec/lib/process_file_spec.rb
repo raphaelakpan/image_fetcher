@@ -1,7 +1,7 @@
 require "spec_helper"
-require_relative "../lib/process_file.rb"
-require_relative "../lib/logger.rb"
-require_relative "../lib/download_image.rb"
+require_relative "../../lib/process_file.rb"
+require_relative "../../lib/logger.rb"
+require_relative "../../lib/download_image.rb"
 
 RSpec.describe ProcessFile do
   let(:file_path) { "/path/to/file.txt" }

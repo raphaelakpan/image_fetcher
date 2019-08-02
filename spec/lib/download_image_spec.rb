@@ -1,7 +1,7 @@
 require "spec_helper"
 require "down"
-require_relative "../lib/download_image.rb"
-require_relative "../lib/logger.rb"
+require_relative "../../lib/download_image.rb"
+require_relative "../../lib/logger.rb"
 
 RSpec.describe DownloadImage do
   let(:url) { "https://somesite.com/wp-content/image.png" }

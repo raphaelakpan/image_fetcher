@@ -1,5 +1,5 @@
 require "spec_helper"
-require_relative "../lib/logger.rb"
+require_relative "../../lib/logger.rb"
 
 RSpec.describe Logger do
   let(:message) { "hello" }

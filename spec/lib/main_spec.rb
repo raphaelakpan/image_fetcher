@@ -1,7 +1,7 @@
 require "spec_helper"
-require_relative "../lib/main.rb"
-require_relative "../lib/logger.rb"
-require_relative "../lib/process_file.rb"
+require_relative "../../lib/main.rb"
+require_relative "../../lib/logger.rb"
+require_relative "../../lib/process_file.rb"
 
 RSpec.describe Main do
   let(:main) { Main.new }
@@ -15,7 +15,8 @@ RSpec.describe Main do
     context "when file_path argument is nil" do
       it "logs relative path error message" do
         expect(ARGV).to receive(:first)
-        expect(Logger).to receive(:warn).with('Please provide a relative path to your file')
+        expect(Logger).to receive(:warn)
+          .with('Please provide a relative path (from this project folder) to your file')
         expect(ProcessFile).not_to receive(:new)
 
         main.run
@@ -34,14 +35,12 @@ RSpec.describe Main do
 
     context "when file_path argument ends in '.txt'" do
       let(:file_path) { '../file.txt' }
-      let(:absolute_path) { 'Users/me/usr/file.txt' }
       let(:process_file) { instance_double("ProcessFile", perform: nil) }
 
       it "calls ProcessFile with the absolute file path" do
         expect(ARGV).to receive(:first) { file_path }
-        expect(File).to receive(:expand_path) { absolute_path }
         expect(ProcessFile).to receive(:new)
-          .with(absolute_path) { process_file }
+          .with(file_path) { process_file }
 
         main.run
       end
